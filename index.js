@@ -9,11 +9,15 @@ app.get('/', (req, res, next) => {
 })
 
 app.get('/ip', (req, res) => {
-    const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-    const client = rqsIp.getClientIp(req);
-    console.log('ip:', ip);
-    console.log('New Ip:', client)
+    const ip = req.headers["x-forwarded-for"] || req.connection.remoteAddress;
+    console.log("ip:", ip);
     res.send({ ip });
+})
+
+app.get('/ip-request', (req, res) => {
+    const client = rqsIp.getClientIp(req);
+    console.log('New Ip:', client)
+    res.send({ client})
 })
 
 app.listen(app.get('port'), () => {
